@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from "./App"
+import App from "../src/ui/components/layout/app/App"
 import "./estilos.css"
 import 'react-loading-skeleton/dist/skeleton.css'
 

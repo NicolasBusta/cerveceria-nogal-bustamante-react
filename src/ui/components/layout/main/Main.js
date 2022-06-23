@@ -1,7 +1,7 @@
-import ItemDetailContainer from "./ItemDetailContainer"
-import ItemListContainer from "./ItemListContainer"
-import Carrito from "./Carrito"
-import Checkout from "./Checkout"
+import ItemDetailContainer from "../../ItemDetailContainer"
+import ItemListContainer from "../../ItemListContainer"
+import Carrito from "../../Carrito"
+import Checkout from "../../Checkout"
 import { Routes, Route } from "react-router-dom"
 
 

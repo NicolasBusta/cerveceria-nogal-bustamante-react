@@ -1,6 +1,6 @@
-import Header from "./Header"
-import Footer from "./Footer"
-import Main from "./Main"
+import Header from "../header/Header"
+import Footer from "../footer/Footer"
+import Main from "../main/Main"
 import { BrowserRouter, useNavigate } from "react-router-dom"
 
 const App = () => {

@@ -1,4 +1,4 @@
-import ItemCount from "./ItemCount"
+import ItemCount from "../components/ItemCount"
 
 const ItemDetail = ({ item }) => {
 
@@ -15,7 +15,7 @@ const ItemDetail = ({ item }) => {
       <p>{item.description}</p>
       <p>Precio : ${item.price}</p>
       <ItemCount initial={1} onAdd={onAdd} stock={5}/>
-      <button>terminar mi compra</button>
+      <button type="button" class="btn btn-success ms-3 mt-3">terminar mi compra</button>
     </div>
   )
 }

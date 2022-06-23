@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import ItemCount from "./ItemCount"
-import { productos } from "./productos"
-import ItemList from "./ItemList"
+import ItemCount from "../components/ItemCount"
+import { productos } from "../../productos"
+import ItemList from "../components/ItemList"
 import { useParams } from "react-router-dom"
-import { ProductLoader } from "./ProductLoader"
+import { ProductLoader } from "../../ProductLoader"
 
 
 const ItemListContainer = ({ greeting }) => {
