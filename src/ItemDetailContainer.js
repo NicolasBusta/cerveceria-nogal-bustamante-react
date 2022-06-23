@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import ItemDetail from "./ItemDetail"
 import { productos } from "./productos"
 import { SkeletonCard } from "./ProductLoader"
+import CartWidget from "./CartWidget"
 
 const ItemDetailContainer = () => {
 
@@ -33,6 +34,8 @@ const ItemDetailContainer = () => {
   return (
     <>
       {loading? <SkeletonCard/> : <ItemDetail item={item} />}
+      <CartWidget/>
+      
     </>
   )
 }
