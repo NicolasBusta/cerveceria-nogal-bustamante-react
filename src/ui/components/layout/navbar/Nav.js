@@ -5,8 +5,7 @@ const Nav = ({ inHeader, laClase }) => {
 
   return (
     <nav className={laClase} class="nav">
-      <CartWidget/>
-      <NavLink class="nav-link link-dark" to="/carrito">Carrito</NavLink>
+      {inHeader ? <CartWidget/> : null}
       <NavLink class="nav-link link-dark" to={inHeader ? "/categoria/rubias" : "http://facebook.com"}>{inHeader ? "Rubias" : "facebook"}</NavLink>
       <NavLink class="nav-link link-dark" to="/categoria/rojas">{inHeader ? "Rojas" : "instagram"}</NavLink>
       <NavLink class="nav-link link-dark" to="/categoria/negras">{inHeader ? "Negras" : "linkedin"}</NavLink>

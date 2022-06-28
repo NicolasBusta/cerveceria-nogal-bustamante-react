@@ -1,8 +1,9 @@
 import ItemCount from "../components/ItemCount"
-
+import { useState } from "react"
 const ItemDetail = ({ item }) => {
 
-  
+  const [cant, setCant] = useState(true)
+
   const onAdd = (cantidadSeleccionada) => {
     console.log("Desde Item Detail : " + cantidadSeleccionada)
     
