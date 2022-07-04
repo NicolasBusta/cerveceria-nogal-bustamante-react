@@ -1,80 +1,90 @@
-import { Link } from "react-router-dom"
-import CartWidget from "./CartWidget"
-import { useReducer } from "react"
-import { useContext, useState } from "react"
-import { contexto } from "../../api/CartContext"
+import React, { useState } from 'react';
+import { useContext } from 'react';
+import { CartContext } from "../../api/CartContext"
+import Item from './Item';
+
 
 const Carrito = () => {
+    const [orderId, setOrderId] = useState('');
 
-  const { carrito } = useContext(contexto)
-  const [nombre, setNombre] = useState("")
-  const [tel, setTel] = useState("")
-  const [email, setEmail] = useState("")
-  const [usuario, setUsuario] = useState({
-    nombre: "",
-    email: "",
-    telefono: ""
-  })
+    const { carrito, deleteItem, totalPrice, deleteAll } = useContext(CartContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    //const usuario = { nombre, tel, email }
-    //console.log(usuario)
-  }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData({
+            ...data,
+            [name]: value,
+        });
+    };
 
-  const handleClick = (e) => {
-    e.preventDefault()
-  }
+    const handleSubmit = (e) => {
+        /* const formatedCart = cart.map((prod) => {
+            return {
+                cantidad: prod.cantidad,
+                id: prod.id,
+            };
+        }); */
+        e.preventDefault();
+        const objOrden = {
+            buyer: {
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+            },
+            carrito,
+            total: totalPrice(),
+            date: serverTimestamp(),
+        };
 
-  const handleNombreChange = (e) => {
-    setNombre(e.target.value)
-  }
+        const ref = collection(db, 'orders');
+        addDoc(ref, objOrden).then((response) => {
+            setOrderId(response.id);
+            deleteAll();
+        });
+    };
+    if (orderId !== '') {
+        return <h1>Gracias por tu compra, tu número de envío es: {orderId}</h1>;
+    }
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-  }
+    return (
+        <>
+            {carrito.length === 0 ? (
+                <div className="empty">Tu carrito está vacio</div>
+            ) : (
+                <>
+                    <div className="cart">
+                        {carrito.map((prod) => (
+                            <div className="infoCart" key={prod.id}>
+                                <img
+                                    src={Item.img}
+                                    alt={Item.name}
+                                    width="70px"
+                                />
+                                <h2>{Item.name}</h2>
+                                <h2>${Item.price}</h2>
+                                <h2>Cantidad: {Item.cantidad}</h2>
+                                <button onClick={() => deleteItem(prod.id)}>
+                                    Eliminar
+                                </button>
+                            </div>
+                        ))}
+                        <div className="cartBtn">
+                            <h2>Total: ${totalPrice()}</h2>
+                            <button onClick={deleteAll}>Vaciar carrito</button>
+                        </div>
+                    </div>
+                    <Form
+                        handleChange={handleChange}
+                        data={data}
+                        handleSubmit={handleSubmit}
+                    />
+                </>
+            )}
+        </>
+    );
+};
 
-  const handleTelChange = (e) => {
-    setTel(e.target.value)
-  }
+export default Carrito;
+/* 
 
-  const handleChange = (e) => {
-    //usuario.nombre
-    //usuario.e.target.id
-    //usuario{e.target.id}
-    //console.dir(e.target.id)
-    //usuario.nombre = ??
-    /*  const nombre = e.target.id
-     usuario.nombre */
-    //Object.assing()
-    /* const copia = { ...usuario }
-    copia[e.target.id] = e.target.value
-    setUsuario(copia) */
-    setUsuario({ ...usuario, [e.target.id] : e.target.value})
-    //{telefono:"",email:"", nombre : "horacio" }
-  }
-
-  return (
-    <div>
-      <CartWidget/>
-      <h1>Carrito</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto impedit sint minima cum minus? Numquam deleniti facilis, officiis perferendis quis sed voluptas nisi ipsa, magni, temporibus odio a commodi maiores!</p>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input onChange={handleChange} type="text" id="nombre" placeholder="Nombre..." value={nombre} />
-        </div>
-        <div>
-          <input onChange={handleChange} type="email" id="email" placeholder="Email..." value={email} />
-        </div>
-        <div>
-          <input onChange={handleChange} type="number" id="telefono" placeholder="Telefono..." />
-        </div>
-        <button /* onClick={handleClick} */>comprar</button>
-      </form>
-
-      <Link to="/checkout">Proceder con la compra</Link>
-    </div>
-  )
-}
-export default Carrito
+*/

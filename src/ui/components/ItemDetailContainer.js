@@ -34,7 +34,7 @@ const ItemDetailContainer = () => {
   return (
     <>
       {loading? <SkeletonCard/> : <ItemDetail item={item} />}
-      <CartWidget/>
+      
       
     </>
   )

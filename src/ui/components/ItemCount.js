@@ -1,6 +1,31 @@
 import { useEffect, useState } from "react"
+const ItemCount = ({ initial, stock, onAdd }) => {
+  const [count, setCount] = useState(initial);
 
-const ItemCount = ({ stock, initial , onAdd }) => {
+  const add = () => {
+      stock !== count && setCount(count + 1);
+  };
+
+  const substract = () => {
+      initial !== count && setCount(count - 1);
+  };
+  return (
+      <div className="count">
+          <div className="buttons">
+              <button onClick={add}>+</button>
+              <p>{count}</p>
+              <button onClick={substract}>-</button>
+          </div>
+          <div className="add-cart">
+              <button onClick={() => onAdd(count)}>Add to Cart!</button>
+          </div>
+      </div>
+  );
+};
+
+export default ItemCount;
+
+/*const ItemCount = ({ stock, initial , onAdd }) => {
 
   const [contador, setContador] = useState(initial)
 
@@ -44,5 +69,7 @@ const ItemCount = ({ stock, initial , onAdd }) => {
 
     </div>
   )
+
 }
-export default ItemCount
+
+export default ItemCount*/
