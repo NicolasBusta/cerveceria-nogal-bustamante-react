@@ -4,7 +4,8 @@ import { productos } from "../../productos"
 import ItemList from "../components/ItemList"
 import { useParams } from "react-router-dom"
 import { ProductLoader } from "../../ProductLoader"
-
+import { db } from "../../firebase"
+import { getDocs, collection } from "firebase/firestore"
 
 const ItemListContainer = ({ greeting }) => {
 
@@ -12,26 +13,31 @@ const ItemListContainer = ({ greeting }) => {
   const [loading, setLoading] = useState(true)
   const { category } = useParams()
 
+
+
   useEffect(() => {
+    const collectionProductos = collection(db, "productos")
+  
+    const consulta = getDocs(collectionProductos)
 
-    setLoading(true)
+    consulta
+      .then((resultado)=>{
+        
 
-    new Promise((res, rej) => {
-      setTimeout(() => {
-        res(category ? productos.filter((producto)=>{
+        const productos_mapeados = resultado.docs.map(referencia=>{
           
-          return producto.category == category
-
-        }) : productos)
-      }, 2000)
-    })
-      .then(resultado => {
-        setItems(resultado)
+          const aux = referencia.data()
+          aux.id = referencia.id
+          return aux
+        })
+        setItems(productos_mapeados)
         setLoading(false)
+
       })
-      .catch(() => {
-        //setItems([])
+      .catch((error)=>{
+        console.log(error)
       })
+    
 
   }, [category])
 

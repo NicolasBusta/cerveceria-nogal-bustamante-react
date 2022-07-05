@@ -4,6 +4,7 @@ import ItemDetail from "../components/ItemDetail"
 import { productos } from "../../productos"
 import { SkeletonCard } from "../../ProductLoader"
 import CartWidget from "../components/CartWidget"
+import { db } from "../../firebase"
 
 const ItemDetailContainer = () => {
 
