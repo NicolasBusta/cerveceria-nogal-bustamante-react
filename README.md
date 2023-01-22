@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+ Website for brewery el nogal, I used HTML,CSS, Bootstrap, JavaScript, Firebase for the project. 
+ used for the final project of web development Reactjs at the coderhause institute. 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
